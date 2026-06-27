@@ -1,0 +1,26 @@
+# Maven
+/target/
+dependency-reduced-pom.xml
+
+# Build output
+*.class
+*.jar
+*.war
+
+# IDEs and editors
+.vscode/
+.metals/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Other
+out/
+.mvn/wrapper/maven-wrapper.jar
