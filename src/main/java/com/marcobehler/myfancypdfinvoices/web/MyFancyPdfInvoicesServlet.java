@@ -1,20 +1,15 @@
 package com.marcobehler.myfancypdfinvoices.web;
 
+import com.marcobehler.myfancypdfinvoices.context.Application;
+import com.marcobehler.myfancypdfinvoices.model.Invoice;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import tools.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.util.List;
 
-import com.marcobehler.myfancypdfinvoices.model.Invoice;
-import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
-
 public class MyFancyPdfInvoicesServlet extends HttpServlet {
-
-    private InvoiceService invoiceService = new InvoiceService();
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -23,18 +18,17 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
             String userId = request.getParameter("user_id");
             Integer amount = Integer.valueOf(request.getParameter("amount"));
 
-            Invoice invoice = invoiceService.create(userId, amount);
+            Invoice invoice = Application.invoiceService.create(userId, amount);
 
             response.setContentType("application/json; charset=UTF-8");
-            //convert your invoice object to a JSON string
-            String json = objectMapper.writeValueAsString(invoice);
+            String json = Application.objectMapper.writeValueAsString(invoice);
             response.getWriter().print(json);
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
-        @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getRequestURI().equalsIgnoreCase("/")) {
             response.setContentType("text/html; charset=UTF-8");
@@ -47,8 +41,8 @@ public class MyFancyPdfInvoicesServlet extends HttpServlet {
                             "</html>");
         } else if (request.getRequestURI().equalsIgnoreCase("/invoices")) {
             response.setContentType("application/json; charset=UTF-8");
-            List<Invoice> invoices = invoiceService.findAll();  // 
-            response.getWriter().print(objectMapper.writeValueAsString(invoices));  // 
+            List<Invoice> invoices = Application.invoiceService.findAll();
+            response.getWriter().print(Application.objectMapper.writeValueAsString(invoices));
         }
     }
 }
