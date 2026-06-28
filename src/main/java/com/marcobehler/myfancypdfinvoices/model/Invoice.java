@@ -1,6 +1,8 @@
-package com.marcobehler;
+package com.marcobehler.myfancypdfinvoices.model;
 
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Invoice {
 
@@ -25,7 +27,8 @@ public class Invoice {
     public void setId(String id) {
         this.id = id;
     }
-
+    //its value defines what the name of the field is going to be in the resulting JSON string.
+    @JsonProperty("user_id") 
     public String getUserId() {
         return userId;
     }
@@ -34,6 +37,7 @@ public class Invoice {
         this.userId = userId;
     }
 
+    @JsonProperty("pdf_url")
     public String getPdfUrl() {
         return pdfUrl;
     }
