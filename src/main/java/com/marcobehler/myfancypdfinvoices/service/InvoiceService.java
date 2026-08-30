@@ -3,9 +3,12 @@ package com.marcobehler.myfancypdfinvoices.service;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.springframework.stereotype.Component;
+
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.model.User;
 
+@Component
 public class InvoiceService {
     private final UserService userService;
 

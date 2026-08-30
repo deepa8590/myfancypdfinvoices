@@ -4,6 +4,9 @@ import com.marcobehler.myfancypdfinvoices.model.User;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserService {
 
     public User findById(String id) {
