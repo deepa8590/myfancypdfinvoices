@@ -3,6 +3,7 @@ package com.marcobehler.myfancypdfinvoices.service;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
@@ -17,6 +18,8 @@ public class InvoiceService {
     //use when read opr are more frequent than write operations, and when you need to iterate over the list without worrying about concurrent modifications.
     List<Invoice> invoices = new CopyOnWriteArrayList<>(); // 
     
+    @Autowired  
+    //ou had multiple constructors, you would have to mark one of them with the @Autowired annotation, so Spring needs to know which one to use.
     public InvoiceService(UserService userService) {
         this.userService = userService;
     }
