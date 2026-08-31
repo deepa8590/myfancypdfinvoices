@@ -11,18 +11,18 @@ import com.marcobehler.myfancypdfinvoices.model.User;
 
 @Component
 public class InvoiceService {
-    private final UserService userService;
-
+    @Autowired
+    //Spring will be smart enough to construct a UserService and then inject the dependencies directly into the fields
+    //// field injection lets you create new instances, but hides the fact that you still need to set a userService
+    private  UserService userService;
 
     //CopyOnWriteArrayList is a thread-safe variant of ArrayList(Whereas ArrayList wuld not be ) in which all mutative operations (add, set, and so on) are implemented by making a fresh copy of the underlying array.
     //use when read opr are more frequent than write operations, and when you need to iterate over the list without worrying about concurrent modifications.
     List<Invoice> invoices = new CopyOnWriteArrayList<>(); // 
     
-    @Autowired  
-    //ou had multiple constructors, you would have to mark one of them with the @Autowired annotation, so Spring needs to know which one to use.
-    public InvoiceService(UserService userService) {
-        this.userService = userService;
-    }
+    // public InvoiceService(UserService userService) {
+    //     this.userService = userService;
+    // }
 
     public List<Invoice> findAll() {
         return invoices;

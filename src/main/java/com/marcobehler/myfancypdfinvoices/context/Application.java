@@ -9,7 +9,7 @@ public class Application {
     
    //Make sure that the UserService gets created before the InvoiceService
     public static final UserService userService = new UserService();
-    public static final InvoiceService invoiceService = new InvoiceService(userService);
+    // public static final InvoiceService invoiceService = new InvoiceService(userService);
     public static final ObjectMapper objectMapper = new ObjectMapper();
 
     

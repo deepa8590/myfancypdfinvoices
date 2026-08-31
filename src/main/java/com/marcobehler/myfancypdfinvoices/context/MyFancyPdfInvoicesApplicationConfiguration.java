@@ -15,10 +15,10 @@ import tools.jackson.databind.ObjectMapper;
 @Configuration
 @ComponentScan(basePackageClasses = ApplicationLauncher.class)
 public class MyFancyPdfInvoicesApplicationConfiguration {
-    // @Bean
-    public InvoiceService invoiceService() {
-        return new InvoiceService(userService());
-    }
+    // // @Bean
+    // public InvoiceService invoiceService() {
+    //     return new InvoiceService(userService());
+    // }
 
     // @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
