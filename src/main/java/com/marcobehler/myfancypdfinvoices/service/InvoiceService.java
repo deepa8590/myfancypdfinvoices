@@ -11,9 +11,6 @@ import com.marcobehler.myfancypdfinvoices.model.User;
 
 @Component
 public class InvoiceService {
-    @Autowired
-    //Spring will be smart enough to construct a UserService and then inject the dependencies directly into the fields
-    //// field injection lets you create new instances, but hides the fact that you still need to set a userService
     private  UserService userService;
 
     //CopyOnWriteArrayList is a thread-safe variant of ArrayList(Whereas ArrayList wuld not be ) in which all mutative operations (add, set, and so on) are implemented by making a fresh copy of the underlying array.
@@ -42,5 +39,11 @@ public class InvoiceService {
         Invoice invoice = new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
         invoices.add(invoice);
         return invoice;
+    }
+
+    //Setter Injection: If you provide a setter, you can manually call invoiceService.setUserService(mockUserService) in a test when you aren't using Spring to wire beans for you.
+    @Autowired
+    public void SetUserService(UserService userService) {
+        this.userService = userService;
     }
 }
