@@ -9,17 +9,31 @@ import org.springframework.stereotype.Component;
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.model.User;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 @Component
 public class InvoiceService {
-    private  UserService userService;
-
     //CopyOnWriteArrayList is a thread-safe variant of ArrayList(Whereas ArrayList wuld not be ) in which all mutative operations (add, set, and so on) are implemented by making a fresh copy of the underlying array.
     //use when read opr are more frequent than write operations, and when you need to iterate over the list without worrying about concurrent modifications.
     List<Invoice> invoices = new CopyOnWriteArrayList<>(); // 
     
-    // public InvoiceService(UserService userService) {
-    //     this.userService = userService;
-    // }
+    @PostConstruct
+    public void init(){
+        System.out.println("InvoiceService initialized");
+        //only postcosntruct bcs we did not explictily shutdown ApllicationContext, so the destroy method will not be called.
+    }
+
+    @PreDestroy
+    public void shutdown(){
+        System.out.println("InvoiceService destroyed");
+    }
+    private final UserService userService;
+
+    @Autowired
+    public InvoiceService(UserService userService) {
+        this.userService = userService;
+    }
 
     public List<Invoice> findAll() {
         return invoices;
@@ -39,11 +53,5 @@ public class InvoiceService {
         Invoice invoice = new Invoice(userId, amount, "http://www.africau.edu/images/default/sample.pdf");
         invoices.add(invoice);
         return invoice;
-    }
-
-    //Setter Injection: If you provide a setter, you can manually call invoiceService.setUserService(mockUserService) in a test when you aren't using Spring to wire beans for you.
-    @Autowired
-    public void SetUserService(UserService userService) {
-        this.userService = userService;
     }
 }
