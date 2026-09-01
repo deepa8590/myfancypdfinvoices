@@ -16,6 +16,9 @@ import tools.jackson.databind.ObjectMapper;
 @Configuration
 @ComponentScan(basePackageClasses = ApplicationLauncher.class)
 @PropertySource("classpath:application.properties")
+@PropertySource(value = "classpath:/application-${spring.profiles.active}.properties", ignoreResourceNotFound = true)
+//The order of these PropertySources is important, with the one specified at the bottom having precedence
+//if the specified file does not exist, hence you set the ignoreResourceNotFound flag to true.
 public class MyFancyPdfInvoicesApplicationConfiguration {
     // // @Bean
     // public InvoiceService invoiceService() {
