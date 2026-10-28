@@ -3,6 +3,7 @@ import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +30,9 @@ public class MyFancyPdfInvoicesController {
         return invoiceService.findAll();
     }
 
-    @PostMapping ("/invoices")
-    // tell Spring to expect two mandatory parameters with exactly those names (user_id, amount).
-    public Invoice createInvoice(@RequestParam("user_id") String userId, @RequestParam("amount") Integer amount) {
+    @PostMapping ("/invoices/{userId}/{amount}")
+    public Invoice createInvoice(@PathVariable("userId") String userId,
+                                 @PathVariable("amount") Integer amount) {
         return invoiceService.create(userId, amount);
     }
 }
