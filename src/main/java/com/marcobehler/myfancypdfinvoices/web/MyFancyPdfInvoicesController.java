@@ -2,9 +2,7 @@ package com.marcobehler.myfancypdfinvoices.web;
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,6 +10,7 @@ import java.util.List;
 
 //so that Spring’s @ComponentScan can find it and make Spring MVC understand: This class can accept HTTP requests
 //it consists of the @Controller and @ResponseBody annotation , @ResponseBody tells Spring, that you want to write JSON or XML or plain text directly to the HttpServletOutputstream,
+@RestController
 public class MyFancyPdfInvoicesController {
     private final InvoiceService invoiceService;
 

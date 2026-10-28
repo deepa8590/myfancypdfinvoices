@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.marcobehler.ApplicationLauncher;
 import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
@@ -19,6 +20,8 @@ import tools.jackson.databind.ObjectMapper;
 @PropertySource(value = "classpath:/application-${spring.profiles.active}.properties", ignoreResourceNotFound = true)
 //The order of these PropertySources is important, with the one specified at the bottom having precedence
 //if the specified file does not exist, hence you set the ignoreResourceNotFound flag to true.
+
+@EnableWebMvc
 public class MyFancyPdfInvoicesApplicationConfiguration {
     // // @Bean
     // public InvoiceService invoiceService() {
