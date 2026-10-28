@@ -1,6 +1,19 @@
-POST http://localhost:8081/invoices?user_id=freddieFox&amount=50
+POST http://localhost:8081/invoices/hans/1
 Accept: application/json
 Cache-Control: no-cache
+
+###
+# Content-Type header of the request to application/json, because Spring needs that header to understand what type of content you are sending in and trigger the appropriate conversion!
+
+POST http://localhost:8081/invoices
+Content-Type: application/json
+Accept: application/json
+Cache-Control: no-cache
+
+{
+  "amount": 5000,
+  "user_id": "helene"
+}
 
 ###
 
