@@ -6,7 +6,7 @@ import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
-import com.marcobehler.myfancypdfinvoices.context.MyFancyPdfInvoicesApplicationConfiguration;
+import com.marcobehler.myfancypdfinvoices.context.ApplicationConfiguration;
 import jakarta.servlet.ServletContext;
 
 import org.springframework.web.context.WebApplicationContext;
@@ -35,7 +35,7 @@ public class ApplicationLauncher {
     //Creating the ApplicationContext : You need to tell it about your SpringConfiguration, as well as the ServletContext
     public static WebApplicationContext createApplicationContext(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(MyFancyPdfInvoicesApplicationConfiguration.class);
+        ctx.register(ApplicationConfiguration.class);
         ctx.setServletContext(servletContext);
         ctx.refresh();
         ctx.registerShutdownHook();

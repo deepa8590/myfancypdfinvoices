@@ -19,11 +19,11 @@ import java.util.List;
 //it consists of the @Controller and @ResponseBody annotation , @ResponseBody tells Spring, that you want to write JSON or XML or plain text directly to the HttpServletOutputstream,
 @RestController
 @Validated
-public class MyFancyPdfInvoicesController {
+public class InvoicesController {
     private final InvoiceService invoiceService;
 
     //constructor-injecting the InvoiceService.
-    public MyFancyPdfInvoicesController(InvoiceService invoiceService) {
+    public InvoicesController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
 

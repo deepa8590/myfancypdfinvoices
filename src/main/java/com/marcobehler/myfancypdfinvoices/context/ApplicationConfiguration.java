@@ -23,7 +23,7 @@ import tools.jackson.databind.ObjectMapper;
 //if the specified file does not exist, hence you set the ignoreResourceNotFound flag to true.
 
 @EnableWebMvc
-public class MyFancyPdfInvoicesApplicationConfiguration {
+public class ApplicationConfiguration {
     // // @Bean
     // public InvoiceService invoiceService() {
     //     return new InvoiceService(userService(), cdnUrl());
