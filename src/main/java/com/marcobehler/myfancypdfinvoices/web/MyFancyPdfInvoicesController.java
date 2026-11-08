@@ -3,6 +3,9 @@ import com.marcobehler.myfancypdfinvoices.dto.InvoiceDto;
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
 
+import jakarta.validation.Valid;
+import jakarta.validation.Validation;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +35,10 @@ public class MyFancyPdfInvoicesController {
         return invoiceService.findAll();
     }
 
+
     @PostMapping ("/invoices")
-    public Invoice createInvoice(@RequestBody InvoiceDto invoiceDto) {
+    // @Valid -> JSR 303 Validation Annotations
+    public Invoice createInvoice(@RequestBody @Valid InvoiceDto invoiceDto) {
         return invoiceService.create(invoiceDto.getUserId(), invoiceDto.getAmount());
     }
 }
