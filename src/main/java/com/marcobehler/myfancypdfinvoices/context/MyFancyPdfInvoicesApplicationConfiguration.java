@@ -6,12 +6,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.marcobehler.ApplicationLauncher;
-import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
 import com.marcobehler.myfancypdfinvoices.service.UserService;
 
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import tools.jackson.databind.ObjectMapper;
 
 @Configuration
@@ -37,5 +38,10 @@ public class MyFancyPdfInvoicesApplicationConfiguration {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
+    }
+
+    @Bean
+    public static MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
     }
 }

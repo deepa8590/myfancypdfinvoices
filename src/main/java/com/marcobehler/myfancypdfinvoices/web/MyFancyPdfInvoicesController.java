@@ -1,17 +1,16 @@
 package com.marcobehler.myfancypdfinvoices.web;
-import com.marcobehler.myfancypdfinvoices.dto.InvoiceDto;
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.service.InvoiceService;
 
-import jakarta.validation.Valid;
-import jakarta.validation.Validation;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -19,6 +18,7 @@ import java.util.List;
 //so that Spring’s @ComponentScan can find it and make Spring MVC understand: This class can accept HTTP requests
 //it consists of the @Controller and @ResponseBody annotation , @ResponseBody tells Spring, that you want to write JSON or XML or plain text directly to the HttpServletOutputstream,
 @RestController
+@Validated
 public class MyFancyPdfInvoicesController {
     private final InvoiceService invoiceService;
 
@@ -37,8 +37,7 @@ public class MyFancyPdfInvoicesController {
 
 
     @PostMapping ("/invoices")
-    // @Valid -> JSR 303 Validation Annotations
-    public Invoice createInvoice(@RequestBody @Valid InvoiceDto invoiceDto) {
-        return invoiceService.create(invoiceDto.getUserId(), invoiceDto.getAmount());
+    public Invoice createInvoice(@RequestParam("user_id") @NotBlank String userId, @RequestParam("amount") @Min(10) @Max(50) Integer amount) {
+        return invoiceService.create(userId, amount);
     }
 }

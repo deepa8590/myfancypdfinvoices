@@ -16,6 +16,10 @@ Cache-Control: no-cache
 }
 
 ###
+POST http://localhost:8081/invoices?user_id=&amount=1
+Accept: text/plain
+
+###
 
 GET http://localhost:8081/invoices
 Accept: application/json
