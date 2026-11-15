@@ -53,7 +53,7 @@ public class ApplicationConfiguration {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine);
         viewResolver.setOrder(1);
-        viewResolver.setViewNames(new String[] {".html", ".xhtml"});
+        viewResolver.setViewNames(new String[] {"*.html", "*.xhtml"});
         return viewResolver;
     }
      
@@ -67,7 +67,7 @@ public class ApplicationConfiguration {
     @Bean 
     public SpringResourceTemplateResolver templateResolver(){
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("classpath:/templates");
+        templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setCacheable(false);
         return templateResolver;
         
