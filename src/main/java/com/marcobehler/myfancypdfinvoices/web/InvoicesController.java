@@ -14,6 +14,8 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+import javax.swing.text.html.HTML;
+
 
 //so that Spring’s @ComponentScan can find it and make Spring MVC understand: This class can accept HTTP requests
 //it consists of the @Controller and @ResponseBody annotation , @ResponseBody tells Spring, that you want to write JSON or XML or plain text directly to the HttpServletOutputstream,
@@ -40,4 +42,10 @@ public class InvoicesController {
     public Invoice createInvoice(@RequestParam("user_id") @NotBlank String userId, @RequestParam("amount") @Min(10) @Max(50) Integer amount) {
         return invoiceService.create(userId, amount);
     }
+
+    // // If you want to return HTML from your methods, you will now need to write a new controller! And you also mustn’t use the @RestController annotation anymore.
+    // @GetMapping ("/")
+    // public String homePage() {
+    //     return "index.html";
+    // }
 }
