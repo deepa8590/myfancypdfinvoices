@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.marcobehler.myfancypdfinvoices.web.Forms.LoginForm;
+
+import jakarta.validation.Valid;
 
 @Controller  // not RestController, because we want to return HTML from our methods, not JSON or XML or plain text.
 public class WebsiteController {
@@ -28,7 +31,10 @@ public class WebsiteController {
 
     @PostMapping ("/login")
     //@ModelAttribute is equivalent to  model.put("loginForm", loginForm).
-    public String login(@ModelAttribute LoginForm loginForm,Model model) {
+    public String login(@ModelAttribute @Valid LoginForm loginForm,BindingResult bindingResult,Model model) {
+        if (bindingResult.hasErrors()) {
+            return "login.html";
+        }
         if (loginForm.getUsername().equals(loginForm.getPassword())) {
             return "redirect:/";
         }
