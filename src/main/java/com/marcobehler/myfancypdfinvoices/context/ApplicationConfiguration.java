@@ -1,5 +1,8 @@
 package com.marcobehler.myfancypdfinvoices.context;
 
+import javax.sql.DataSource;
+import org.h2.jdbcx.JdbcDataSource;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -46,6 +49,14 @@ public class ApplicationConfiguration {
     @Bean
     public static MethodValidationPostProcessor methodValidationPostProcessor() {
         return new MethodValidationPostProcessor();
+    }
+    @Bean 
+    public DataSource dataSource() {
+        JdbcDataSource ds = new JdbcDataSource();
+        ds.setURL("jdbc:h2:~/myFirstH2Database");
+        ds.setUser("sa");
+        ds.setPassword("sa");
+        return ds;
     }
 
     @Bean 
