@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.marcobehler.myfancypdfinvoices.model.Invoice;
 import com.marcobehler.myfancypdfinvoices.model.User;
@@ -53,7 +55,9 @@ public class InvoiceService {
 
 
     //jdbcTemplate 's query method, which lets you specify the SQL query as the first parameter, and a row mapper. The row mapper lets you map every returned SQL row into a Java object, 
+    @Transactional 
     public List<Invoice> findAll() {
+        System.out.println("Is a database transaction open? = " + TransactionSynchronizationManager.isActualTransactionActive());
         return jdbcTemplate.query("select id, pdf_url, user_id, amount from invoices", (resultSet , rowNum)-> {
             Invoice invoice = new Invoice();
             invoice.setId(resultSet.getString("id"));
@@ -65,9 +69,9 @@ public class InvoiceService {
     }
 
     //Before you create an invoice, you are now constructing a new UserService and checking if that users exists.
-
+    @Transactional
     public Invoice create(String userId, Integer amount) {
-  
+    System.out.println("Is a database transaction open? = " + TransactionSynchronizationManager.isActualTransactionActive());
         String generatedPdfUrl = cdnUrl + "/images/default/sample.pdf";
         //DBC driver will make sure to make the generated id available to you via a KeyHolder object, that you need to pass into the JDBCTemplate
         KeyHolder keyHolder = new GeneratedKeyHolder();

@@ -28,7 +28,7 @@ Accept: application/json
 GET http://localhost:8081/?username=marco
 
 ###
-POST http://localhost:8081/invoices?user_id=hans&amount=10
+POST http://localhost:8081/invoices?user_id=Deepa&amount=10
 ### 
 GET http://localhost:8082/transaction
 Accept: application/json

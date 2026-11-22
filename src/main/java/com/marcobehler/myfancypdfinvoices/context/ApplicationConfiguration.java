@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -30,6 +33,7 @@ import tools.jackson.databind.ObjectMapper;
 //if the specified file does not exist, hence you set the ignoreResourceNotFound flag to true.
 
 @EnableWebMvc
+@EnableTransactionManagement 
 public class ApplicationConfiguration {
     // // @Bean
     // public InvoiceService invoiceService() {
@@ -64,6 +68,10 @@ public class ApplicationConfiguration {
     @Bean 
     public JdbcTemplate jdbcTemplate(){
         return new JdbcTemplate(dataSource());
+    }
+    @Bean 
+    public TransactionManager transactionManager(){
+        return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean 
